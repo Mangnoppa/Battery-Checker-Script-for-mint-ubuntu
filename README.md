@@ -9,11 +9,11 @@ A Battery Monitor script for mint/ubuntu os. Once started it polls for every 5 m
 ` git clone https://github.com/Mangnoppa/Battery-Checker-Script-for-mint-ubuntu.git`
 
 # Usage
-Clone the repository
+- Clone the repository
 
-` cd git clone https://github.com/Mangnoppa/Battery-Checker-Script-for-mint-ubuntu.git` or the name you gave the folder
+- ` cd Battery-Checker-Script-for-mint-ubuntu` or the name you gave the folder
 
-` make`
+- ` make`
 
 # ATTENTION
 The Makefile is under developement and is not testes with systemd.
