@@ -38,15 +38,18 @@ install_prog:
 upstart: make_config_file
 	sudo cp ${INIT_CONFIG_FILE} ${INIT_PATH}${INIT_CONFIG_FILE}
 	sudo chown root:root ${INIT_PATH}${INIT_CONFIG_FILE}
-	rm ${INIT_CONFIG_FILE}
+#	sudo start batterychecker
+#	rm ${INIT_CONFIG_FILE}
 
 make_config_file:
 	@touch ${INIT_CONFIG_FILE}
-	@echo "start on runlevel [2345]\n" > ${INIT_CONFIG_FILE}
+	echo "description 'Starting BatteryChecker'" > ${INIT_CONFIG_FILE}
+	echo "author 'Mangnoppa <mangnoppa@arcor.de>'\n" >> ${INIT_CONFIG_FILE}
+	@echo "start on runlevel [2345]\n" >> ${INIT_CONFIG_FILE}
 	@echo "stop on runlevel [016]\n" >> ${INIT_CONFIG_FILE}
 	@echo "respawn\n" >> ${INIT_CONFIG_FILE}
 	@echo "chdir /usr/local/bin/\n" >> ${INIT_CONFIG_FILE}
-	@echo "exex BatteryCheckerScript.sh" >> ${INIT_CONFIG_FILE}
+	@echo "exec BatteryCheckerScript.sh" >> ${INIT_CONFIG_FILE}
 
 install_dep:
 	@wget $(MP3_ZIP_URL)
