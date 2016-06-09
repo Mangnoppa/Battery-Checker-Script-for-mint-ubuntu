@@ -8,9 +8,12 @@ MP3 = Low-battery-sound.mp3
 DEP_LIST = alsa sox libsox-fmt-mp3
 INSTALL_TARGETS = install_dep install_prog
 
-RC_LOCAL_PATH = /etc/rc.local
-TMP_RC_LOCAL = test.rc
-EXEC_AT_BOOT = (/bin/sleep 10 && ${BIN_PATH}${PROG})
+#RC_LOCAL_PATH = /etc/rc.local
+#TMP_RC_LOCAL = test.rc
+#EXEC_AT_BOOT = (/bin/sleep 10 && ${BIN_PATH}${PROG})
+
+INIT_CONFIG_FILE = batterychecker.conf
+INIT_PATH = /etc/init/
 
 SYSTEMD_SERVICE_FILE = batterychecker.service
 SYSTEMD_PATH = /etc/systemd/system/
@@ -32,14 +35,18 @@ install_prog:
 	@sudo cp $(PROG) $(BIN_PATH)
 	@sudo chown $$USER:$$USER $(BIN_PATH)$(PROG)
 
-upstart:
-ifneq ($(ALREADY_IN), $(EXEC_AT_BOOT))
-	@sudo cp ${RC_LOCAL_PATH} ${RC_LOCAL_PATH}.bak
-	@sudo sh -c "sed 's#exit 0\$$#(/bin/sleep 10 \&\& ${BIN_PATH}${PROG})\n\nexit 0#' ${RC_LOCAL_PATH} > $(TMP_RC_LOCAL)"
-	@sudo chmod +x $(TMP_RC_LOCAL)
-	@sudo cp $(TMP_RC_LOCAL) $(RC_LOCAL_PATH)
-	@sudo rm $(TMP_RC_LOCAL)
-endif
+upstart: make_config_file
+	sudo cp ${INIT_CONFIG_FILE} ${INIT_PATH}${INIT_CONFIG_FILE}
+	sudo chown root:root ${INIT_PATH}${INIT_CONFIG_FILE}
+	rm ${INIT_CONFIG_FILE}
+
+make_config_file:
+	@touch ${INIT_CONFIG_FILE}
+	@echo "start on runlevel [2345]\n" > ${INIT_CONFIG_FILE}
+	@echo "stop on runlevel [016]\n" >> ${INIT_CONFIG_FILE}
+	@echo "respawn\n" >> ${INIT_CONFIG_FILE}
+	@echo "chdir /usr/local/bin/\n" >> ${INIT_CONFIG_FILE}
+	@echo "exex BatteryCheckerScript.sh" >> ${INIT_CONFIG_FILE}
 
 install_dep:
 	@wget $(MP3_ZIP_URL)
