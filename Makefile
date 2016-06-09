@@ -1,4 +1,4 @@
-PROG = BatteryChecker.sh
+PROG = BatteryCheckerScript.sh
 BIN_PATH = /usr/local/bin/
 
 MP3_ZIP_URL = http://www.orangefreesounds.com/wp-content/uploads/Zip/Low-battery-sound.zip
