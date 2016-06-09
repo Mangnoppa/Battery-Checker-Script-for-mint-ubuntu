@@ -18,7 +18,7 @@
 while true;
 do
 
-chekpc=18
+chekpc=20
 state=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep "state" | awk '{print $2}'`
 pc=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep "percentage" | awk '{print $2}' | cut -d'%' -f1`
 counter=0
@@ -35,11 +35,9 @@ then
 		vol_level=` amixer sget 'Master' | grep "Mono" | grep "dB" | cut -d"[" -f2 | cut -d "%" -f1`
 		while [ $counter -lt 3 -a "$state" != "charging" ]
 		do
-			echo "Connect Charger!" 
-			
 			state=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep "state" | awk '{print $2}'`				       
 
-            echo `amixer sset 'Master' 60%` > /dev/null
+            echo `amixer sset 'Master' 70%` > /dev/null
 
 			if [ "$OnOROff" == "off" ]
 			then
