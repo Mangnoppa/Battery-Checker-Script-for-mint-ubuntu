@@ -10,7 +10,9 @@ A Battery Monitor script for mint/ubuntu os. Once started it polls for every 5 m
 
 # Usage
 Clone the repository
+
 ` cd git clone https://github.com/Mangnoppa/Battery-Checker-Script-for-mint-ubuntu.git` or the name you gave the folder
+
 ` make`
 
 # ATTENTION
