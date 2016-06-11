@@ -63,7 +63,7 @@ install_dep:
 # change permissions, rm tmp-service-file and start batterychecker
 systemd: make_service_file
 	@sudo cp ${SYSTEMD_SERVICE_FILE} ${SYSTEMD_PATH}${SYSTEMD_SERVICE_FILE}
-	@chown root:root ${SYSTEMD_PATH}${SYSTEMD_SERVICE_FILE}
+	@sudo chown root:root ${SYSTEMD_PATH}${SYSTEMD_SERVICE_FILE}
 	@sudo chmod 664 ${SYSTEMD_PATH}${SYSTEMD_SERVICE_FILE}
 	@rm ${SYSTEMD_SERVICE_FILE}
 	@systemctl enable ${SYSTEMD_SERVICE_FILE}
