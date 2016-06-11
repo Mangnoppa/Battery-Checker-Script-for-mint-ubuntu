@@ -23,3 +23,12 @@ It Checks Battery percentage. If it is less than 18% then prompts a low-battery-
 The Makefile is under developement and is not tested with systemd.
 If you don't want to use an untested Makefile, follow the instructions from the
 original repository at https://github.com/rameshgkwd05/Battery-Checker-Script-for-mint-ubuntu
+
+# TODO
+- Open a window with dropdownlist, in/from Makefile, to choose for which battery the script should be installed
+
+- Make poll-interval variable
+
+- Make percentage variable
+
+- If sound is muted, only show a message -> no sound
